@@ -7,10 +7,14 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var questions = [
-      'What\'s your favarite color?',
-      'What\'s your favorite animal?',
-    ];
+    // var questions = [
+    //   'What\'s your favarite color?',
+    //   'What\'s your favorite animal?',
+    // ];
+
+    void answerQuestion() {
+      print('Answer Question #1');
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -20,13 +24,13 @@ class MyApp extends StatelessWidget {
         body: Column(
           children: [
             Text('The questions!'),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Answer #1'),
-              onPressed: null,
+              onPressed: answerQuestion,
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Answer #2'),
-              onPressed: null,
+              onPressed: () => print('Answer Question #2'),
             ),
           ],
         ),
