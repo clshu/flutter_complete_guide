@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
-
-// void main() {
-//   runApp(MyApp());
-// }
+import './quiz.dart';
+import './result.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,12 +32,11 @@ class _MyAppState extends State<MyApp> {
   void _answerQuestion() {
     setState(() {
       _questionIndex = _questionIndex + 1;
-      if (_questionIndex >= _questions.length) {
-        _questionIndex = 0;
-      }
     });
-
     print(_questionIndex);
+    if (_questionIndex < _questions.length) {
+      print('More Questions');
+    }
   }
 
   @override
@@ -51,33 +46,13 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('My First App'),
         ),
-        body: Column(
-          children: [
-            Question(
-              _questions[_questionIndex]['questionText'],
-            ),
-            ...(_questions[_questionIndex]['answers'] as List<String>).map(
-              (answer) {
-                return Answer(
-                  title: answer,
-                  clickHandler: _answerQuestion,
-                );
-              },
-            )
-            // Answer(
-            //   title: 'Answer #1',
-            //   clickHandler: _answerQuestion,
-            // ),
-            // Answer(
-            //   title: 'Answer #2',
-            //   clickHandler: _answerQuestion,
-            // ),
-            // Answer(
-            //   title: 'Answer #3',
-            //   clickHandler: _answerQuestion,
-            // ),
-          ],
-        ),
+        body: _questionIndex < _questions.length
+            ? Quiz(
+                answerQuestion: _answerQuestion,
+                questionIndex: _questionIndex,
+                questions: _questions,
+              )
+            : Result(),
       ),
     );
   }
