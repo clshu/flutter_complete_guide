@@ -17,8 +17,7 @@ class Answer extends StatelessWidget {
     );
 
     return Container(
-      // width: double.infinity,
-
+      width: double.infinity,
       child: ElevatedButton(
         style: _style,
         child: Text(title),

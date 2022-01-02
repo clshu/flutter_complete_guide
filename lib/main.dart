@@ -19,8 +19,18 @@ class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
   var _questions = [
-    'What\'s your favorite color?',
-    'What\'s your favorite animal?',
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': ['Black', 'Blue', 'Green', 'Orange'],
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': ['Snake', 'Lion', 'Wolf'],
+    },
+    {
+      'questionText': 'Who\'s your favorite preident?',
+      'answers': ['Lincoln', 'Washington', 'Adams'],
+    },
   ];
 
   void _answerQuestion() {
@@ -44,20 +54,28 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             Question(
-              _questions[_questionIndex],
+              _questions[_questionIndex]['questionText'],
             ),
-            Answer(
-              title: 'Answer #1',
-              clickHandler: _answerQuestion,
-            ),
-            Answer(
-              title: 'Answer #2',
-              clickHandler: _answerQuestion,
-            ),
-            Answer(
-              title: 'Answer #3',
-              clickHandler: _answerQuestion,
-            ),
+            ...(_questions[_questionIndex]['answers'] as List<String>).map(
+              (answer) {
+                return Answer(
+                  title: answer,
+                  clickHandler: _answerQuestion,
+                );
+              },
+            )
+            // Answer(
+            //   title: 'Answer #1',
+            //   clickHandler: _answerQuestion,
+            // ),
+            // Answer(
+            //   title: 'Answer #2',
+            //   clickHandler: _answerQuestion,
+            // ),
+            // Answer(
+            //   title: 'Answer #3',
+            //   clickHandler: _answerQuestion,
+            // ),
           ],
         ),
       ),
